@@ -1,8 +1,6 @@
-# 232R_GroupProject
+# Examine US Happiness Trends with census data.
 UCSD Spring 2024 232R Big Data Analytics Using Spark Group Project 
-
-**Project**: Examine US Happiness Trends with census data. 
-Team Members: Taylor Witte, Donald Yu, Praveen Manimaran, Vitush Agarwal, Parker Aman
+**Team Members:** Taylor Witte, Donald Yu, Praveen Manimaran, Vitush Agarwal, Parker Aman
 
 # Introduction 
 Why was it chosen? Why is it cool? Discuss the general/broader impact of having a good predictive mode. i.e. why is this important?
@@ -92,7 +90,7 @@ This is where you do a mind dump on your opinions and possible future directions
 
 
 # Collaboration 
-- **Taylor Witte:**
+- **Taylor Witte: Project Manager** I set up and organized the GitHub and dataset. In addition, I organized meetings and GitHub projects for each milestone with milestones and issues to plan and split up the execution of our project. For Milestone 1, I generated and imported the dataset into the pyspark. For Milestone 2, I decoded the variables and their categorical encodings, performed null analysis, adjusted monetary variables for inflation, generated exploratory graphs to understand Individual Technical Variables, Household Technical Variables, Household Composition Variables, and the World Happiness Dataset, and contributed to the readMe. For Milestone 3, I performed preprocessing, scaling, and transformation for both household and individual variables, evaluated FlowSOM clustering for individual data which unfortunately was not useable, evaluated the household K-Means analysis, developed a decision tree household model, and contributed to the readME. For Milestone 4, I combined the household and individual datasets,  built the decision tree model with and without Household Income, generated readable graphics of the Decision Tree, and contributed to the ReadMe Methods, Results, and Discussion sections. 
 - **Vitush Agarwal:**
 - **Donald Yu:**
 - **Parker Aman:**
