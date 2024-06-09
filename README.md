@@ -3,9 +3,15 @@ UCSD Spring 2024 232R Big Data Analytics Using Spark Group Project <br>
 **Team Members:** Taylor Witte, Donald Yu, Praveen Manimaran, Vitush Agarwal, Parker Aman
 
 # Introduction 
-Why was it chosen? Why is it cool? Discuss the general/broader impact of having a good predictive mode. i.e. why is this important?
-[Description of Dataset and their respective variables](Dataset_Description.md)
+Home ownership is a cornerstone of economic stability and social well-being, affecting financial security, health outcomes, and community involvement. Understanding the factors that predict whether individuals own or rent their homes is essential for addressing housing inequality and creating effective housing policies. This study delves into these factors by analyzing extensive individual and household data from the American Community Survey (ACS) for the years 2012 to 2022, excluding 2020 due to the COVID-19 pandemic.
 
+The decision to focus on home ownership and renting was motivated by their significant implications on Americans. Owning a home often provides a sense of security, while renting can reflect different socio-economic conditions. The ability to accurately predict home ownership can thus inform policies that aim to increase housing affordability and accessibility, reduce socio-economic disparities, and improve overall quality of life.
+
+The approach of utilizing advanced data analysis techniques and machine learning models to predict home ownership is particularly exciting due to the potential insights and applications it offers. By leveraging the computational power of the Spark framework and the resources of the San Diego Supercomputer Center (SDSC), this study analyzes large-scale datasets efficiently. The integration of K-means clustering, Principal Component Analysis (PCA), Decision Trees, and Logistic Regression in predictive modeling allows for a detailed understanding of the factors that influence home ownership and renting.
+
+The datasets utilized in this study include individual and household census data from the ACS, encompassing over 10 million individuals and 81 variables. Key variables include demographic information such as age, race, and citizenship status; socioeconomic factors like education attainment, class of work, and total household income; and housing-related details such as group quarter status, household type, and ownership status. By combining these massive datasets, the study provides a comprehensive view of the diverse factors influencing home ownership.
+
+The broader impact of developing a reliable predictive model for home ownership is substantial. Accurate predictions can guide policymakers in designing targeted interventions to support potential homeowners, especially in underrepresented and disadvantaged communities. Moreover, these models can help financial institutions in offering tailored mortgage products. For urban planners and social scientists, understanding the dynamics of home ownership can lead to better resource allocation and community development strategies.
 
 # Methods 
 
