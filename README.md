@@ -1,5 +1,5 @@
 # Examine US Happiness Trends with census data.
-UCSD Spring 2024 232R Big Data Analytics Using Spark Group Project 
+UCSD Spring 2024 232R Big Data Analytics Using Spark Group Project <br>
 **Team Members:** Taylor Witte, Donald Yu, Praveen Manimaran, Vitush Agarwal, Parker Aman
 
 # Introduction 
