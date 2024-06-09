@@ -81,6 +81,10 @@ This fitting graph shows as the complexity (depth of trees) increases, we do con
 
 # Discussion 
 
+## Model 1
+
+## Model 2
+
 
 # Conclusion 
 This is where you do a mind dump on your opinions and possible future directions. Basically what you wish you could have done differently. Here you close with final thoughts.
