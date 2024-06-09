@@ -44,20 +44,20 @@ The goal of model 2 was to predict ownership from individual demographic and hou
 # Results 
 ## Model 1 
 
-Figure ?: Model 1 PCA Plot of Clusters for Household Census KMeans
+**Figure 1: Model 1 PCA Plot of Clusters for Household Census KMeans**
 
 ![alt text](image.png)
 
 
-Figure ?: Model 1 including Family Income Feature for Household Census KMeans
+**Figure 2: Model 1 including Family Income Feature for Household Census KMeans**
 
 ![alt text](image-2.png)
 
-Figure ?: Model 1 PCA Plot of Clusters for Individual Census KMeans
+**Figure 3: Model 1 PCA Plot of Clusters for Individual Census KMeans**
 
 ![alt text](image-3.png)
 
-Figure ?: Model 1 including Family Income Feature for Individual Census KMeans
+**Figure 4: Model 1 including Family Income Feature for Individual Census KMeans**
 
 ![alt text](image-4.png)
 
@@ -71,10 +71,13 @@ The decision tree was able to predict with 99% accuracy whether a house was owne
 
 
 ## Model 2 
-**Figure ?: Model 2 including Family Income Fearture**
+
+The decision tree including family income achieved a test accuracy of 77.9% and is represented in Figure 5. When family income was removed the model achieved a 77.1% test accuracy and is represented in Figure 6.
+
+**Figure 5: Model 2 including Family Income Fearture**
 <img width="1207" alt="Screenshot 2024-06-08 at 6 48 46 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/f2874083-ee2b-47cd-858f-19e749d491fe">
 
-**Figure ?: Model 2 excluding Family Income Fearture**
+**Figure 6: Model 2 excluding Family Income Fearture**
 <img width="1397" alt="Screenshot 2024-06-08 at 6 48 12 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/87d1dcd9-b5c6-42fe-8e9e-82cd7ec9f205">
 
 
@@ -97,6 +100,11 @@ The high accuracy and clear decision rules suggest that the Decision Tree model 
 
 
 ## Model 2
+The decision tree trained with household income (Figure 5) chose total household income, age, marital status, family size, household type, and race as features used to predict ownership of homes. Interestingly, year was not selected as a feature indicating it does not have an important impact on an individual's ability to own a home. This could be due to the data not indicating when the home was bought and who the owner of the home is. To be able to determine if it was harder to buy a house in 2022 compared to 2012 that data would be needed. It is expected that income would be the most important indicator of ownership. It makes sense that age is an important factor since older people are more likely to settle down and have longer to save for a home. Interestingly, even within older age groups and the same household income marriage, race, and whether or not an individual had children was a differentiator between owning and renting. Family size and Household Type could have been overrepresented since we put all individuals into the model and did not filter for just the head of household potentially leading to families being overrepresented.
+
+When income was removed as a variable and the decision tree classification was re-run (Figure 6), the model was still able to predict homeownership with similar accuracy. This decision tree selected Household Type, Citizenship Status, Age, Race, Education, Person Number in the Household, and Family Size. Person Number in Household and family size are most likely similarly representing a family that lives in the household. Although there were multiple categories of race, being white or not was the only distinguishing factor. It also appears gender which was not included as an option had an impact through Household Type. Additionally, it is worth noting the education variable didn't indicate whether an individual had received a college degree or not but splits on 4 or more years of college vs less than 4 years of college may be selecting individuals with college degrees. 
+
+In future work, including household weight would increase the power of these results to ensure it is representative of the population. Rather than including all individuals only including the head of the household may provide more representative results. It also would be interesting if variables such as whether an individual was retired or not when the home was bought, and whether an individual had inheritance or help from family.
 
 
 # Conclusion 
