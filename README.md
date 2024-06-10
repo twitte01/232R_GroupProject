@@ -43,23 +43,25 @@ The goal of model 2 was to predict ownership from individual demographic and hou
 
 # Results 
 ## Model 1 
+For the Household Census Kmeans, the PCA Cluster  plot (Figure 1a) show the average values for each feature for the three clusters identified. Each bar represents a feature and its height reflects the mean value of that feature within the cluster. K-means idenified three clusters: households who own, households who rent and group quarters. The silhouette score is 0.351 indicating the clusters are not well-defined and distinct from each other. In the Cluster Centers plot (Figure 1b), across all the variables have similar and not distinct across the clusters.
 
 **Figure 1: Model 1 Household Census KMeans Clustering**
 
 <img src="image.png" width="500" height="400"/> <img src="image-2.png" width="500" height="400"/>
+
 _Figure 1a: PCA Plot & Figure 1b: Kmeans Features_ 
+
+
+For the Individual Census Kmeans, the PCA Cluster plot (Figure 2a) shows the average values of each feature for the three identified clusters. Each bar represents a feature, and its height reflects the mean value of that feature within the cluster. The features include demographic, socio-economic, and health-related variables. Notably, variables such as AINCTOT (total income), AFTOTINC (family total income), and POVERTY show significant differences across clusters (Figure 2b), indicating that income and poverty status are key distinguishing factors among the clusters. The silhouette score is 0.869, which is quite high. A high silhouette score close to 1 indicates that the clusters are well-defined and distinct from each other. The points within each cluster are very similar to each other and different from points in other clusters.
 
 **Figure 2: Model 1 Individual Census KMeans Clustering**
 
 <img src="image-3.png" width="500" height="400"/> <img src="image-4.png" width="500" height="400"/>
+
 _Figure 2a: PCA Plot & Figure 2b: Kmeans Features_ 
 
-For the Household Census Kmeans, The Cluster Center plots show the average values for each feature for the three clusters identified. Each bar represents a feature and its height reflects the mean value of that feature within the cluster. K-means idenified three clusters: households who own, households who rent and group quarters.The silhouette score is 0.351 indicating the clusters are not well-defined and distinct from each other.
 
-For the Individual Census Kmeans, the Cluster Centers plot shows the average values of each feature for the three identified clusters. Each bar represents a feature, and its height reflects the mean value of that feature within the cluster. The features include demographic, socio-economic, and health-related variables. Notably, variables such as AINCTOT (total income), AFTOTINC (family total income), and POVERTY show significant differences across clusters, indicating that income and poverty status are key distinguishing factors among the clusters.
-The silhouette score is 0.869, which is quite high. A high silhouette score close to 1 indicates that the clusters are well-defined and distinct from each other. The points within each cluster are very similar to each other and different from points in other clusters.
-
-The decision tree was able to predict with 99% accuracy whether a house was owned or rented based on the four variables. First group quarters were excluded since they are neither rented or owned. 
+The decision tree was able to predict with 99% accuracy whether a house was owned or rented based on the four variables. First group quarters were excluded since they are neither rented or owned.
 
 
 ## Model 2 
