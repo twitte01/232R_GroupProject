@@ -73,7 +73,7 @@ The decision tree was able to predict with 99% accuracy whether a house was owne
 The decision tree including family income achieved a test accuracy of 77.9% and is represented in Figure 5. When family income was removed the model achieved a 77.1% test accuracy and is represented in Figure 6.
 
 **Figure 5: Model 2 including Family Income Fearture**
-<img width="1000" alt="Screenshot 2024-06-08 at 6 48 46 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/f2874083-ee2b-47cd-858f-19e749d491fe">
+<img width="900" alt="Screenshot 2024-06-08 at 6 48 46 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/f2874083-ee2b-47cd-858f-19e749d491fe">
 
 
 
