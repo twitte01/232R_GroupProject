@@ -1,183 +1,125 @@
-# 232R_GroupProject
-UCSD Spring 2024 232R Big Data Analytics Using Spark Group Project 
+# Examine US Happiness Trends with census data.
+UCSD Spring 2024 232R Big Data Analytics Using Spark Group Project <br>
+**Team Members:** Taylor Witte, Donald Yu, Praveen Manimaran, Vitush Agarwal, Parker Aman
 
-**Project**: Examine US Happiness Trends with census data. 
-Team Members: Taylor Witte, Donald Yu, Praveen Manimaran, Vitush Agarwal, Parker Aman
+# Introduction 
+Homeownership is a cornerstone of economic stability and social well-being, affecting financial security, health outcomes, and community involvement. Understanding the factors that predict whether individuals own or rent their homes is essential for addressing housing inequality and creating effective housing policies. This study delves into these factors by analyzing extensive individual and household data from the American Community Survey (ACS) for the years 2012 to 2022, excluding 2020 due to the COVID-19 pandemic.
 
-## Abstract
-This project aims to uncover trends in happiness across the United States by analyzing individual and household census data from the American Community Survey for the years 2012-2022, excluding 2020 due to the COVID-19 pandemic. Leveraging the power of the Spark framework and SDSC to manage large-scale datasets, pertinent features are selected from the comprehensive data. The analysis will utilize machine learning techniques provided by Spark's MLlib to explore relationships between demographic variables and reported happiness levels. The findings are expected to offer insights into how various factors influence happiness across different regions and demographic groups in the US. This study will provide an understanding of the determinants of happiness.
+The decision to focus on home ownership and renting was motivated by their significant implications on Americans. Owning a home often provides a sense of security, while renting can reflect different socio-economic conditions. The ability to accurately predict home ownership can thus inform policies that aim to increase housing affordability and accessibility, reduce socio-economic disparities, and improve overall quality of life.
 
-## Data Set
-**Dataset Overview**
-This project will combine multiple datasets. 
-Individual & household census data from the American Community Survey years 2012-2022 excluding 2020 due to the data being impacted by the COVID-19 pandemic. Due to the size of the data, we selected features from the entire dataset using IPUMS. The datasets can be found in this Google Drive (https://drive.google.com/drive/folders/1BgAn6uJvuALPtYoMj1vYInDOWKlxUyXX?usp=drive_link) and can be accessed following these instructions https://usa.ipums.org/usa/extract_instructions.shtml
-Additionally, the World Happiness Report dataset from 2012-2022 excluding 2020 is being utilized to examine US happiness. 
-Together the dataset contains over 10 million individuals and 81 variables. For ease of understanding we have categorized the variables. 
+The approach of utilizing advanced data analysis techniques and machine learning models to predict home ownership is particularly exciting due to the potential insights and applications it offers. By leveraging the computational power of the Spark framework and the resources of the San Diego Supercomputer Center (SDSC), this study analyzes large-scale datasets efficiently. The integration of K-means clustering, Principal Component Analysis (PCA), Decision Trees, and Logistic Regression in predictive modeling allows for a detailed understanding of the factors that influence home ownership and renting.
 
-### World Happiness Report Data
+The datasets utilized in this study include individual and household census data from the ACS, encompassing over 10 million individuals. [A description of the Datasets and their variables can be found in the Dataset Description.](Dataset_Description.md) Key variables include demographic information such as age, race, and citizenship status; socioeconomic factors like education attainment, class of work, and total household income; and housing-related details such as group quarter status, household type, and ownership status. By combining these massive datasets, the study provides a comprehensive view of the diverse factors influencing home ownership.
 
-Number of Variables: 15
-Number of Years: 10 
+The broader impact of developing a reliable predictive model for home ownership is substantial. Accurate predictions can guide policymakers in designing targeted interventions to support potential homeowners, especially in underrepresented and disadvantaged communities. Moreover, these models can help financial institutions in offering tailored mortgage products. For urban planners and social scientists, understanding the dynamics of home ownership can lead to better resource allocation and community development strategies.
 
-1. Country Name
-2. Regional Indicator
-3. Year
-4. Happiness Index
-5. Happiness Rank
-6. Life Ladder
-7. Log GDP Per Capita
-8. Social Support
-9. Healthy Life Expectancy At Birth
-10. Freedom To Make Life Choices
-11. Generosity
-12. Perceptions Of Corruption
-13. Positive Affect
-14. Negative Affect
-15. Confidence In National Government'
+# Methods 
 
-### Individual Census Data Variables
+## Data Exploration
+For each dataset, we first looked at the number of null/missing values and took steps during preprocessing to address these issues. We also look at the number of rows and the number of variables(decide which variables to use later) and the years represented in the dataset.
 
-Number of Variables: 35
-Number of Individuals: 10000426
-Number of Households: 1394624
+Happiness Dataset: Explored the distribution of different variables such as Life Ladder, Log GDP Per Capita, Social Support, Healthy Life Expectancy at Birth, Freedom To Make Life Choices, Generosity, Positive Affect, Negative Affect, and Confidence in National Government. We also plot these variables over time to see the trends of these variables from 2012 to June 2022. We were able to notice to that that since the first year of that the report was created was in 2012 and there have been big changes since then with the happiness score decreasing over time. 
 
-**Technical Variables**
-* Year
-* SAMPLE (IPUMS sample identifier)
-* SERIAL (Household serial number)
-* CBSERIAL: (Original Census Bureau household serial number)
-* HHWT: (Household weight)
-* PERNUM: (Person number in sample unit) 
-* CBPERNUM: (Original Census Bureau Person number in sample unit)
-* CLUSTER: (Household cluster for variance estimation) 
-* CPI99: (CPI-U adjustment factor to 1999 dollars)
-* STRATA: (Household strata for variance estimation)
-**Household Variables**
-* PERWT: (Person weight)
-* FAMSIZE: (Number of own family members in household)
-* GQ: (Group quarters status)
-**Demographic Variables**
-* SEX: (Sex) 
-* AGE: (Age) 
-* MARST: (Marital status) 
-* RACE: (Race [general version]) 
-* RACED: (Race [detailed version]) 
-* CITIZEN: (Citizenship status)
-**Education Variables**
-* SCHOOL: (School attendance) 
-* EDUC: (Educational attainment [general version]) 
-* EDUCD: (Educational attainment [detailed version])
-* SCHLTYPE: (Public or private school) 
-**Health Variables**
-* HCOVANY: (Any health insurance coverage) 
-**Employment & Income Variables**
-* EMPSTAT: (Employment status [general version]) 
-* EMPSTATD: (Employment status [detailed version])
-* CLASSWKR: (Class of worker [general version]) 
-* CLASSWKRD: (Class of worker [detailed version]) 
-* UHRSWORK: (Usual huours worked per week) 
-* LOOKING: (Looking for work) 
-* INCTOT: (Total personal income)
-* FTOTINC: (Total family income)
-* INCWELFR: (Welfare (public assistance) income)
-* INCINVST: (Interest, dividend, and rental income)
-* POVERTY: (Poverty status) 
+Individual Census Dataset: We investigate each variable individually, and plot the distributions of all the relevant variables to see any trends and patterns. We plotted the distribution of the entire dataset as well as demographic variables(Age, Race, Education), Marital Status Distribution, Distribution of Family sizes, Health Insurance Coverage Distribution, Employment Status Distribution, and the Hours worked per Week Distribution. 
 
-### Household Census Variables
+Household Census Dataset: From initial exploration, we found that the number of households for those individuals decrease overtime and realized further analysis needs to be done to understand why. We also explored the distribution of household types(married couple family, male_no_wife, female_living_alone, etc). We also looked at the distribution of number of famileies per Household each year, housing unit types, and internet access for each household. We saw a decrease in the number of farms each year with the percentage of farms relative to households per year being fairly consistent. Our group alos saw a downward trend in the number of owned houses and explored the distribution of hosuehold weight per year. We plotted the average cost of electricity, gas, fuel, and water per year since 2012 and noticed a similar downward trend for each. The average number of vehicles increased from 2012 to 2020 but has decreased a lot from 2020 to 2022.
 
-Number of Variables: 31
-Number of Individuals: 10,002,255
-Number of Households: 1,416,026
+These data exploration methods allowed us to get a better understanding of which variables we should use and what variables need to be preprocessed before building our models.
 
-**Technical Variables**
-* YEAR
-* SAMPLE: (IPUMS sample identifier)
-* SERIAL: (Household serial number)
-* CBSERIAL: (Original Census Bureau household serial number) 
-* HHWT: (Household weight)
-* HHTYPE: (Household Type) 
-* CLUSTER: (Household cluster for variance estimation)
-* CPI99: (CPI-U adjustment factor to 1999 dollars)
-* STRATA: (Household strata for variance estimation)
-**Geographic Variables**
-* STATEICP: (State (ICPSR code)) State Identifier with digit codes.
-* MET2023: (Metropolitan area (2023 delineations, identifiable areas only))
-**Economic Characteristics**
-* MOBLHOME: (Annual mobile home costs)
-* TAXINCL: (Mortgage payment includes property taxes)
-* INSINCL: (Mortgage payment includes property insurance)
-* RENTGRS: (Monthly gross rent)
-* CONDOFEE: (Monthly condominium fee)
-* MOBLHOME: (Annual mobile home costs)
-* HHINCOME: (Total household income)
-* FOODSTMP: (Food stamp recipiency) 
-* VALUEH: (House value)
-**Appliance, Mechanical, Other Variables**
-* COSTELEC: (Annual electricity cost)
-* COSTGAS: (Annual gas cost)
-* COSTWATR: (Annual water cost)
-* COSTFUEL: (Annual home heating fuel cost) 
-* CINETHH: (Access to internet) 
-* VEHICLES: (Vehicles available)
-**Houshold Composition Variables**
-* GQ: (Group quarters status) 
-* FARM: (Farm status) Farm status is a catagorical variable represented by digits. 
-* OWNERSHP: (Ownership of dwelling (tenure) [general version]) 
-* OWNERSHPD: (Ownership of dwelling (tenure) [detailed version]) 
-* COUPLETYPE: (Householder couple type) 
-* NFAMS: (Number of families in household)
+
+## Preprocessing 
+Variables were selected to be diverse enough to get a deep understanding of the US population and reflect the World Happiness Data variables but concise enough to be able to process. The distribution of all variables was examined to ensure the dataset was representative of the US population. For the household census dataset, each row represents an individuals but all variables were measured on a household level so the dataset was filtered to remove individuals within the same household to leave unique household instances. The World Happiness Report Dataset was filtered to only include US datapoints between the year of 2012-2022(except 2020 due to covid). All monetary variables were normalized for inflation to the 2000 dollar values. Variables that were missing from too many individuals and/or households will be removed from further analysis. For some selected categorical variables, categories were combined such as household definitions for the Group Quarters variable. For clustering, all variables were normalized using the MinMax Scaler to a 0-1 scale. Each column was scaled individually. The MinMax normalization function was selected to preserve the true distribution of each variable. Additonally,one-hot encoding was used to handle select categorical variables to create binary features. This allowed for more streamlined analysis of the variables.
+
+## Model 1
+
+The goal of the model 1 was to predict home ownership and renting using the individual and household datasets.
+The Kmeans code first creates a "features" column in the dataset using PySpark's VectorAssembler, which consolidates all feature columns into a single vector column. This new DataFrame is then cached for efficient reuse. Next, the code determines the optimal number of clusters for K-means clustering by calculating the cost (sum of squared distances) for cluster numbers ranging from 2 to 9. The costs are plotted to visualize the elbow point, which helps in identifying the best number of clusters.The code performs K-means clustering on the dataset, setting the number of clusters to the suggested k cluster number from the elbow point. After fitting the K-means model and obtaining the cluster centers, it adds the cluster predictions to the DataFrame. Principal Component Analysis (PCA) is then applied to reduce the dimensionality of the features to two components, which are visualized in a scatter plot showing the cluster distribution. The cluster centers are plotted in a bar chart to illustrate the values of each feature per cluster. Also, a ClusteringEvaluator is used to calculate the silhouette score, providing a measure of the clustering quality.
+
+In addition to the KMeans, Decision Tree was used to predict whether a house was owned or rented based on the four variables.  The code begins by splitting the dataset into training and testing sets using an 80-20 split. It identifies and removes irrelevant columns ("OWNERSHPD," "OWNERSHP," and "ARENTGRS") before assembling the remaining features into a single vector column for modeling. A Decision Tree Classifier is then trained on the training data, and predictions are made on the test data. The accuracy of the model is evaluated using a Multiclass Classification Evaluator. Feature importance is extracted and displayed, with a custom mapping applied to replace feature numbers and predicted class numbers with meaningful labels. Finally, the structure of the decision tree is printed with these labels, and the code calculates and prints the percentage of rented properties and those in group quarters.
+
+
+## Model 2
+The goal of model 2 was to predict ownership from individual demographic and household information. To begin, we chose several  variables that individuals have and do not have control of. The variables selected were Age, Race, Citizenship Status, Education Attainment, Class of Work, Marital Status, Number of own family members in the household, Number of families in the household, Group Quarter Status (Household vs Group Quarters), State, Year, Household Type (Married vs Single, etc), and Person Number in Sample Unit. To build this model we tested two types of models: logistic regression and decision tree. Both gave similar accuracy 74% and 78% respectively. We chose the decision tree which had a slightly higher accuracy and allowed for a more understandable model. The decision tree performed feature selection by only splitting on relevant features. To mitigate overfitting we only allowed for a maximum depth of the trees but did not limit the number of samples per split node. We did not consider the household weight which indicates how representative a household is of all households which could be included in further adaptations to decrease the bias of the model. We also ran this decision tree with the total household income and without, which gave some interesting results and will be discussed in further sections.
+
+# Results 
+## Model 1 
+For the Household Census Kmeans, the PCA Cluster  plot (Figure 1a) show the average values for each feature for the three clusters identified. Each bar represents a feature and its height reflects the mean value of that feature within the cluster. K-means idenified three clusters: households who own, households who rent and group quarters. The silhouette score is 0.351 indicating the clusters are not well-defined and distinct from each other. In the Cluster Centers plot (Figure 1b), across all the variables have similar and not distinct across the clusters.
+
+**Figure 1: Model 1 Household Census KMeans Clustering**
+
+<img src="image.png" width="500" height="400"/> <img src="image-2.png" width="500" height="400"/>
+
+_Figure 1a: PCA Plot & Figure 1b: Kmeans Features_ 
+
+
+For the Individual Census Kmeans, the PCA Cluster plot (Figure 2a) shows the average values of each feature for the three identified clusters. Each bar represents a feature, and its height reflects the mean value of that feature within the cluster. The features include demographic, socio-economic, and health-related variables. Notably, variables such as AINCTOT (total income), AFTOTINC (family total income), and POVERTY show significant differences across clusters (Figure 2b), indicating that income and poverty status are key distinguishing factors among the clusters. The silhouette score is 0.869, which is quite high. A high silhouette score close to 1 indicates that the clusters are well-defined and distinct from each other. The points within each cluster are very similar to each other and different from points in other clusters.
+
+**Figure 2: Model 1 Individual Census KMeans Clustering**
+
+<img src="image-3.png" width="500" height="400"/> <img src="image-4.png" width="500" height="400"/>
+
+_Figure 2a: PCA Plot & Figure 2b: Kmeans Features_ 
+
+
+The decision tree was able to predict with 99% accuracy whether a house was owned or rented based on the four variables. First group quarters were excluded since they are neither rented or owned.
+
+
+## Model 2 
+
+We tried two decision trees (Figures 3 & 4) for Model 2. We were curious to see the changee in accuracy if we witheld the Family Income variable. As we can see, there results are very similar both gave decent accuracy results for predicting whether someone owned or rented a home.
+The decision tree including family income achieved a test accuracy of 77.9% and is represented in Figure 3. When family income was removed the model achieved a 77.1% test accuracy and is represented in Figure 4.
+
+**Figure 3: Model 2 including Family Income Fearture**
+<img width="900" alt="Screenshot 2024-06-08 at 6 48 46 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/f2874083-ee2b-47cd-858f-19e749d491fe">
 
 
 
-## Preprocessing Methodology
-
-To generate the dataset a random sample of 1 million instances per year was generated. Variables were selected to be diverse enough to get a deep understanding of the US population and reflect the World Happiness Data variables but concise enough to be able to process. 
-The distribution of all variables was examined to ensure the dataset was representative of the US population. 
-For the household census dataset, each row represents an individuals but all variables were measured on a household level so the dataset was filtered to remove individuals within the same household to leave unique household instances. 
-The World Happiness Report Dataset was filtered to only include US datapoints between the year of 2012-2022.
-All monetary variables were normalized for inflation to the 2000 dollar values. 
-Variables that were missing from too many individuals and/or households will be removed from further analysis. For some selected categorical variables, categories were combined such as household definitions for the Group Quarters variable. For clustering, all variables were normalized using the MinMax Scaler to a 0-1 scale. Each column was scaled individually. The MinMax normalization function was selected to preserve the true distribution of each variable. 
+**Figure 4: Model 2 excluding Family Income Fearture**
+<img width="1000" alt="Screenshot 2024-06-08 at 6 48 12 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/87d1dcd9-b5c6-42fe-8e9e-82cd7ec9f205">
 
 
-**Feature Expansion**
+This fitting graph (Figure 5) shows as the complexity (depth of trees) increases, we continue to see an increase in accuracy, however, it is trivial. We can see the best depth to pick is 2. After this, the marginal increase in accuracy is not worth the complexity.
 
-Created a FULLTIME column in the individual dataset that is a 1 if the individual works 40+ hours per week, and a 0 if otherwise. Also created a COSTUTIL column in the household dataset that sums up all of the utility costs.
+**Figure 5: Model 2 Fitting Graph**
 
-## Models 
+<img src="image-1.png" width="600" height="400"/>
 
-**K Means**
+# Discussion 
 
-Ran the scaled/normalized household dataset through the kmeans clustering model with different values for k (2-10) and plotted the cost of features, so we can determine the best value for k.
+## Model 1
+
+The KMeans clustering on the Household Census Data yielded a silhouette score of 0.351, indicating poorly defined and overlapping clusters. This suggests that households classified as owners or renters are similar across other metrics, making it challenging for the model to form distinct clusters. Increasing the number of clusters might help create more nuanced and distinguishable groups, but the current results highlight the limitations of KMeans for this dataset. In contrast, the KMeans clustering on the Individual Census Data resulted in a high silhouette score of 0.869. This indicates that the clusters are well-defined, with high internal similarity and low external similarity. The clustering model effectively grouped individuals into distinct clusters, suggesting that individual-level data provides clearer distinction compared to household-level data.
+
+The  disparity in silhouette scores between the Household and Individual Census Data suggests that KMeans may not be suitable for predicting homeownership solely based on household metrics. The high silhouette score for individual data indicates that personal demographics and attributes contribute more distinctly to clustering outcomes. Combining both datasets and reapplying KMeans clustering could potentially reveal more insightful patterns and improve cluster definition.
+
+One limitation of our current approach is the reliance on KMeans clustering, which may not capture the complex relationships between variables in the Household Census Data. Future work could explore alternative clustering algorithms, such as hierarchical clustering or DBSCAN, which might better handle the nuances in the data. Additionally, incorporating more features in the datasets could provide a better context for analysis. Combining the Household and Individual Census Data and applying clustering techniques could lead to new insights and improve our understanding of the factors influencing homeownership. This integrated approach may help identify more granular patterns and enhance the overall predictive accuracy of our models.
+
+The high accuracy and clear decision rules suggest that the Decision Tree model effectively captured the key determinants of homeownership. The predominance of "HOUSE_VALUE" and "GROUP_QUARTERS" aligns with the intuitive understanding that property value and living arrangements significantly influence homeownership status. However, the model's heavy reliance on a few key features raises concerns about its ability to generalize. Although it performs well on our current dataset, it might not work as effectively with different data or additional features. Additionally, leaving out factors like household income dynamics and individual demographics may limit the model's overall accuracy and depth. Future work should consider integrating more variables in the datasets to enrich the feature set. Combining household and individual data could provide deeper insights into the determinants of homeownership. Exploring other models or incorporating clustering techniques to preprocess and segment the data might further enhance predictive accuracy and robustness.
 
 
-For the K-Means on the individual dataset, Elbow Curve was used to get the k-value of 3. The Cluster Centers plot shows the average values of each feature for the three identified clusters. Each bar represents a feature, and its height reflects the mean value of that feature within the cluster. The features include demographic, socio-economic, and health-related variables. Notably, variables such as AINCTOT (total income), AFTOTINC (family total income), and POVERTY show significant differences across clusters, indicating that income and poverty status are key distinguishing factors among the clusters.
+## Model 2
+The decision tree trained with household income (Figure 5) chose total household income, age, marital status, family size, household type, and race as features used to predict ownership of homes. Interestingly, year was not selected as a feature indicating it does not have an important impact on an individual's ability to own a home. This could be due to the data not indicating when the home was bought and who the owner of the home is. To be able to determine if it was harder to buy a house in 2022 compared to 2012 that data would be needed. It is expected that income would be the most important indicator of ownership. It makes sense that age is an important factor since older people are more likely to settle down and have longer to save for a home. Interestingly, even within older age groups and the same household income marriage, race, and whether or not an individual had children was a differentiator between owning and renting. Family size and Household Type could have been overrepresented since we put all individuals into the model and did not filter for just the head of household potentially leading to families being overrepresented.
 
-The silhouette score is 0.869, which is quite high. A high silhouette score close to 1 indicates that the clusters are well-defined and distinct from each other. The points within each cluster are very similar to each other and different from points in other clusters. The clustering model has successfully grouped the data points into clusters that have high internal similarity and low external similarity.
+When income was removed as a variable and the decision tree classification was re-run (Figure 6), the model was still able to predict homeownership with similar accuracy. This decision tree selected Household Type, Citizenship Status, Age, Race, Education, Person Number in the Household, and Family Size. Person Number in Household and family size are most likely similarly representing a family that lives in the household. Although there were multiple categories of race, being white or not was the only distinguishing factor. It also appears gender which was not included as an option had an impact through Household Type. Additionally, it is worth noting the education variable didn't indicate whether an individual had received a college degree or not but splits on 4 or more years of college vs less than 4 years of college may be selecting individuals with college degrees. 
 
-Based on the visualizations, KMeans appears to be a good model for clustering this dataset. The high silhouette score of 0.869 indicates that the clusters are well-defined and distinct from each other, with data points closer to their assigned cluster centers compared to other clusters. The PCA plot further supports this, showing clear separation between clusters in a two-dimensional space. The cluster centers plot reveals meaningful differences across several features, particularly income-related variables. Together, these findings suggest that KMeans effectively captures the underlying structure of the data, making it a suitable model for identifying and analyzing patterns within the dataset.
+In future work, including household weight would increase the power of these results to ensure it is representative of the population. Rather than including all individuals only including the head of the household may provide more representative results. It also would be interesting if variables such as whether an individual was retired or not when the home was bought, and whether an individual had inheritance or help from family.
 
-To model the household dataset, K-Means was used for clustering. An Elbow curve was used to get the k-value of 3. However, the clustering was unsuccessful with a silhouette score of 0.359. Since K-means was unsuccessful, a decision tree was built using the household data to predict ownership status: rented or owned. 
 
-**Decision Trees**
+# Conclusion 
+This study aimed to find the factors influencing home ownership versus renting by leveraging large-scale datasets from the American Community Survey (ACS). Through the development and application of K-means clustering and Decision Tree models, we identified key demographic and socioeconomic variables that predict housing status. The models demonstrated the significant impact of variables such as age, race, citizenship status, education, employment class, marital status, and household composition on home ownership.
 
-A decision tree was built using the household data to predict ownership status: rented or owned. The dataset also contains group quarter house which reported N/A to the ownership question. This subset only represents 10% of the test dataset. Rented properties represented 26% of the test dataset. The decision tree achieved a test accuracy of 99.9% with only 3 variables: Group Quarter, Inflation Adjusted House Value, and Year. The Group Quarter variable was used to filter out group quarters. The remaining 90% of households' ownership status was determined based on house value and year.
+Reflecting on the research process, several areas for improvement and future exploration emerge. The KMeans clustering on the Household Census Data yielded a low silhouette score of 0.351, suggesting poorly defined and overlapping clusters. This suggests that households classified as owners or renters are similar across other metrics, making it challenging for the model to form distinct clusters. In contrast, the KMeans clustering on the Individual Census Data resulted in a high silhouette score of 0.869, indicating well-defined clusters. This disparity suggests that individual-level data provides clearer distinctions compared to household-level data. Combining both datasets and reapplying KMeans clustering could potentially reveal more insightful patterns and improve cluster definition.
 
-## Evaluating Models and Comparing Test and Training Data (Fitting Graph)
+One limitation of our current approach is the reliance on KMeans clustering, which may not capture the complex relationships between variables in the Household Census Data. Future work could explore alternative clustering algorithms, such as hierarchical clustering or DBSCAN, which might better handle the nuances in the data. Additionally, incorporating more features in the datasets could provide a better context for analysis. Combining the Household and Individual Census Data and applying clustering techniques could lead to new insights and enhance our understanding of the factors influencing homeownership.
 
-It appears that the training and test errors decrease sharply from a max depth of 1 to 2. This indicates that a tree depth of 1 is too simple to capture the underlying patterns in the data. After increasing from a max depth of 2, both the training and test errors still remain very low, so this may suggest that increasing the depth beyond 2 does not significantly improve the model's performance on both training and test data. 
+The high accuracy and clear decision rules of the Decision Tree model suggest that it effectively captured the key determinants of homeownership. The predominance of "HOUSE_VALUE" and "GROUP_QUARTERS" aligns with the intuitive understanding that property value and living arrangements significantly influence homeownership status. However, the model's heavy reliance on a few key features raises concerns about its ability to generalize. Future work should consider integrating more variables in the datasets to enrich the feature set. Exploring other models or incorporating clustering techniques to preprocess and segment the data might further enhance predictive accuracy and robustness.
 
-We also notice that the training and test errors overlap so closely in the fitting graph. 
-There are some potential reasons for this:
+Final thoughts highlight the importance of this research in informing housing policies and contributing to social and economic well-being. Accurate predictive models of home ownership can guide interventions aimed at increasing housing accessibility and affordability, particularly for marginalized communities. By continuing to refine these models and explore new avenues of research, we can better understand the dynamics of home ownership and develop strategies to foster more equitable housing opportunities.
 
-1. Simplistic Data: The data might be very simple which makes it easy for even shallow trees to achieve high accuracy on both training and test sets.
-2. Small Data Variability: If the training and test sets are very similar, the errors might overlap due to a lack of variability in the data.
 
-Ways we can address #2 is to plot the distribution of features to see if there's significant overlap between training and test sets and we can address #1 by showing summary statistics using describe() in Spark. This will be done in the next step.
-
-## Conclusion & Next Steps
-
-We were very happy with the results from our first few models. Besides the clustering on the Household data, we saw some surprisingly good test errors. We plan on dropping some features from the household dataset and tuning a few parameters for the clustering model. We feel we can get better results, however we all had trouble accessing the SDSC computer. This made running the models locally very difficult. When we secure full access, we will make the appropriate changes to improve our findings. We also discussed a couple other models such as predicting individuals' salary and homeowning ability based on the census data using a random forest model. 
-
-## Environment Setup
-
-pip install pyspark-dist-explore
+# Collaboration 
+- **Taylor Witte: Project Manager** I set up and organized the GitHub and dataset. In addition, I organized meetings and GitHub projects for each milestone with milestones and issues to plan and split up the execution of our project. For Milestone 1, I generated and imported the dataset into the pyspark. For Milestone 2, I decoded the variables and their categorical encodings, performed null analysis, adjusted monetary variables for inflation, generated exploratory graphs to understand Individual Technical Variables, Household Technical Variables, Household Composition Variables, and the World Happiness Dataset, and contributed to the readMe. For Milestone 3, I performed preprocessing, scaling, and transformation for both household and individual variables, evaluated FlowSOM clustering for individual data which unfortunately was not useable, evaluated the household K-Means analysis, developed a decision tree household model, and contributed to the readME. For Milestone 4, I combined the household and individual datasets,  built the decision tree model with and without Household Income, generated readable graphics of the Decision Tree, and contributed to the ReadMe Methods, Results, and Discussion sections. 
+- **Vitush Agarwal: Coder/Writer** For Milestone 1, I aided in group meetings to find and select a dataset for our project. For Milestone 2, I explored the household variables surrounding utitlies including water, gas, and electric as well as houshold cars. For Milestone 3, I evaluated a FlowSOM clustering on the household data which unfortunatley was not useable. For Milestone 4, I reviwed sections of our code to make sure it was properly commented. I also wrote both the ReadME Introduction and Conclusion for our final submission.
+- **Donald Yu: Coder/Writer** For Milestone 2, I conducted data exploration on a few variables in the Individual Census data set. I generated and evalauated the usefulness of the variables. On Milestone 3, I developed and implemented the KMeans for the Model 1's Individual Census KMeans. I provided insights to the results and predictions of the KMeans. Collaborated with team in improving the SparkSession builder to optimize the runtime. Assisted with the Milestone 4 final README writeup 
+- **Parker Aman: Coder/Writer** For Milestone 2, I explored the household income and home value variables. I also explored the individual income and poverty scores. For Milestone 3 I split the dataset into train and test sets for us to use for our models. I also built and evalutated the k means clustering model using the household data. For Milestone 4, I collaborated with Taylor to build or decision tree model for Model 2. I also evaluated the model and created the appropriate fitting graph. Lastly, I contributed to the ReadMe Methods and Results sections.
+- **Praveen Manimaran: Coder/Writer** For Milestone 1, I helped import the dataset into pyspark and set up our jupyer notebook. For Milestone 2, I performed data exploration on the indiviudal census data. The variables that I decided to explore were the Education variables: Highest Level of Education Attainment, School Attendance During a Specific Period, School Type. For Milestone 3, I wrote the code to evaluate the decision tree for Model #1 which led us to make changes to our model. For Milestone 4, I wrote the data exploration steps in the README and created the data exploration jupyter notebook.
