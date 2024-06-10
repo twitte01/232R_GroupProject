@@ -46,21 +46,19 @@ The goal of model 2 was to predict ownership from individual demographic and hou
 
 **Figure 1: Model 1 PCA Plot of Clusters for Household Census KMeans**
 
-![alt text](image.png)
-
+<img src="image.png" width="600" height="400"/>
 
 **Figure 2: Model 1 including Family Income Feature for Household Census KMeans**
 
-![alt text](image-2.png)
+<img src="image-2.png" width="600" height="400"/>
 
 **Figure 3: Model 1 PCA Plot of Clusters for Individual Census KMeans**
 
-![alt text](image-3.png)
+<img src="image-3.png" width="600" height="400"/>
 
 **Figure 4: Model 1 including Family Income Feature for Individual Census KMeans**
 
-![alt text](image-4.png)
-
+<img src="image-4.png" width="600" height="400"/>
 
 For the Household Census Kmeans, The Cluster Center plots show the average values for each feature for the three clusters identified. Each bar represents a feature and its height reflects the mean value of that feature within the cluster. K-means idenified three clusters: households who own, households who rent and group quarters.The silhouette score is 0.351 indicating the clusters are not well-defined and distinct from each other.
 
@@ -75,16 +73,19 @@ The decision tree was able to predict with 99% accuracy whether a house was owne
 The decision tree including family income achieved a test accuracy of 77.9% and is represented in Figure 5. When family income was removed the model achieved a 77.1% test accuracy and is represented in Figure 6.
 
 **Figure 5: Model 2 including Family Income Fearture**
-<img width="1207" alt="Screenshot 2024-06-08 at 6 48 46 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/f2874083-ee2b-47cd-858f-19e749d491fe">
+<img width="1000" alt="Screenshot 2024-06-08 at 6 48 46 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/f2874083-ee2b-47cd-858f-19e749d491fe">
+
+
 
 **Figure 6: Model 2 excluding Family Income Fearture**
-<img width="1397" alt="Screenshot 2024-06-08 at 6 48 12 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/87d1dcd9-b5c6-42fe-8e9e-82cd7ec9f205">
+<img width="1000" alt="Screenshot 2024-06-08 at 6 48 12 PM" src="https://github.com/twitte01/232R_GroupProject/assets/168356340/87d1dcd9-b5c6-42fe-8e9e-82cd7ec9f205">
 
 
 This fitting graph shows as the complexity (depth of trees) increases, we do continue to see an increase in accuracy, however, it is trivial. We can see the best depth to pick is 2. After this, the marginal increase in accuracy is not worth it.
 
-![alt text](image-1.png)
+**Figure 7: Model 2 Fitting Graph**
 
+<img src="image-1.png" width="600" height="400"/>
 
 # Discussion 
 
